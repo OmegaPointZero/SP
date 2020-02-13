@@ -1,0 +1,114 @@
+DNS
+
+1. snowplowanalytics.com is registered at http://ionos.com, with the authoritative registry server url at  https://rdap-core.vrsn.com/com/v1/domain/snowplowanalytics.com, registrar server at https://rdap.ionos.com/domain/SNOWPLOWANALYTICS.COM, and nameservers at ns-54.awsdns-06.com, ns-653.awsdns-17.net, ns-1292.awsdns-33.org, and ns-2027.awsdns-61.co.uk.
+
+2. snowplowanalytics.com is hosted in Amazon, with AWS CloudFront.
+
+3. The IP Address of snowplowanalytics.com, when pinged from my machine, is 2600:9000:208d:4a00:1e:e024:8fc0:93a1. The website is actually hosted by Amazon AWS (I think S3 and EC2), and I've resolved the following IP Addresses as a sample of the different places Amazon has hosted instances of the site while I was online:
+
+143.204.226.51 (server-143-204-226-51.cdg3.r.cloudfront.net)
+143.204.226.37 (server-143-204-226-37.cdg3.r.cloudfront.net)
+143.204.226.64 (server-143-204-226-64.cdg3.r.cloudfront.net)
+143.204.226.3 (server-143-204-226-3.cdg3.r.cloudfront.net)
+13.225.38.53 (server-13-225-38-53.cdg3.r.cloudfront.net)
+13.225.38.67 (server-13-225-38-67.cdg3.r.cloudfront.net)
+13.225.38.20 (server-13-225-38-20.cdg3.r.cloudfront.net)
+13.225.38.97 (server-13-225-38-97.cdg3.r.cloudfront.net)
+13.224.47.42 (extracted from browser query with BrupSuite)
+
+4. MX Queries point to Google and GoogleMail managing email for snowplowanalytics.com.
+
+SSL Certificate
+
+1. The SSL certificate was issued by Amazon
+
+2. It expires on Sunday, February 7, 2021 at 5:00:00 AM.
+
+3. Yes, because it's a certificate for *.snowplowanalytics.com, and the wildcard means all of it's subdomains can use the same certificate.
+
+4. No, that one is issued to specifically discourse.snowplowanalytics.com by Let's Encrypt Authority X3, and exipres on Sunday, April 19, 2020 at 6:00:52 PM, with different SHA-256 and SHA-1 Fingerprints.
+
+SQL
+
+1. SELECT COUNT(*) AS `results` FROM `` WHERE
+
+SELECT COUNT(*) AS `results` FROM `events` WHERE `event`="page_view"
+
+
+2. 
+ 
+3. 
+
+Scripting Languages
+
+For a quick and dirty implementation of all of the cities being printed out (Python3):
+
+import requests
+data = (requests.get('http://jsonplaceholder.typicode.com/users')).json()
+for person in data:
+    print(person['address']['city'])
+
+Or, if you wanted only a list of the cities mentioned without any duplicates:
+
+import requests
+data = (requests.get('http://jsonplaceholder.typicode.com/users')).json()
+cities = []
+for person in data:
+    city = person ['address']['city']
+    if city not in cities:
+        cities.append(city)
+
+for city in cities:
+    print(city)
+
+JSON
+
+Line 3: This line is terminated with unicode character U+201a, a "low quotation" mark, and is confused for unicode character U+002c, the comma. It needs to be a comma. 
+Line 4: the "click" is surrounded two sets of curved opening quotes, and needs to be surrounded by regular double quotes.
+Line 5: "12345" is trying to define an object, so a colon is needed, not a semi colon.
+Line 6: "primary" needs to be put into double quotes, as it is a String
+Line 11: The comma after the value for the key "height" needs to be removed as it is the final key in the object.
+Line 19: "acme.com" needs to be put into double quotes, not single quotes, to match the rest of the document.
+Line 20: There is an extra } bracket at the end of the document, only the "12345" object and actual JSON need to be enclosed, so the presence of 3 is one too many.
+
+The final, valid JSON should look like this: 
+
+{
+ 	"id": "12345",
+ 	"type": "event",
+ 	"name": "click",
+ 	"12345": {
+ 		"primary": true,
+ 		"image": {
+ 			"url": "images/0001.jpg",
+ 			"width": 200,
+ 			"height": 200
+ 		},
+ 		"thumbnail": {
+ 			"url": "images/thumbnails/0001.jpg",
+ 			"width": 32,
+ 			"height": 32
+ 		},
+ 		"root": "acme.com"
+    }
+}
+
+Web Technologies
+
+<html>
+<head>
+    <title>Snowplow</title>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
+    <link rel="stylesheet" type="text/css" href=" http://cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/
+css/alertify.min.css">
+</head>
+<body>
+    <button id="myButton">Click me</button>
+</body>
+<script>
+    var button = document.getElementById("myButton");
+    button.addEventListener("click",function(e){
+        alertify.alert("Well Done!")
+    });
+</script>
+</html>
